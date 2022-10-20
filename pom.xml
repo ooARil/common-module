@@ -27,8 +27,6 @@
         <maven.compiler.target>11</maven.compiler.target>
         <maven.compiler.plugin>3.8.1</maven.compiler.plugin>
         <maven.jar.plugin>3.2.2</maven.jar.plugin>
-
-<!--        нужен для устранения варнинга-->
         <maven.jxr.plugin>2.3</maven.jxr.plugin>
 
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -74,11 +72,6 @@
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-compiler-plugin</artifactId>
                     <version>${maven.compiler.plugin}</version>
-                    <configuration>
-                        <source>${maven.compiler.source}</source>
-                        <target>${maven.compiler.target}</target>
-                        <encoding>UTF-8</encoding>
-                    </configuration>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
@@ -124,15 +117,12 @@
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jar-plugin</artifactId>
-<!--                <executions>-->
-<!--                    <execution>-->
-<!--                        <id>Test Jar</id>-->
-<!--                        <goals>-->
-<!--                            <goal>test-jar</goal>-->
-<!--                        </goals>-->
-<!--                    </execution>-->
-<!--                </executions>-->
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>${maven.compiler.source}</source>
+                    <target>${maven.compiler.target}</target>
+                    <encoding>UTF-8</encoding>
+                </configuration>
             </plugin>
         </plugins>
     </build>
@@ -159,6 +149,25 @@
                             <execution>
                                 <id>checkstyle-validate-sources</id>
                                 <phase>none</phase>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+            <id>build-test-jars</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-jar-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>Test Jar</id>
+                                <goals>
+                                    <goal>test-jar</goal>
+                                </goals>
                             </execution>
                         </executions>
                     </plugin>
