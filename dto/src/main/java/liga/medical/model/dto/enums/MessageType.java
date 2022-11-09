@@ -1,4 +1,4 @@
-package liga.medical.model;
+package liga.medical.model.dto.enums;
 
 public enum MessageType {
 
